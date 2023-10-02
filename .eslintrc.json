@@ -15,6 +15,7 @@
     "plugins": [
         "react"
     ],
+    "ignorePatterns": ["*.test.*"],
     "rules": {
       "no-unused-vars":"warn",
       "react/react-in-jsx-scope": "off",
