@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Question from './components/Question';
 
 const App = (props) => {
   useEffect(() => {
@@ -19,7 +20,6 @@ const App = (props) => {
     <>
       <LoadingBar />
       <div className="App">
-        {/** TODO: properly load component */}
         {props.loading === true ? (
           <Login />
         ) : (
@@ -27,6 +27,8 @@ const App = (props) => {
             <Nav />
             <Routes>
               <Route exact path="/" element={<Home />} />
+
+              <Route exact path="/question/:id" element={<Question />} />
             </Routes>
           </>
         )}
