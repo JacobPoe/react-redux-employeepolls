@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 const Ballot = (props) => {
   return (
     <>
@@ -11,4 +13,6 @@ const Ballot = (props) => {
   );
 };
 
-export default Ballot;
+const mapStateToProps = ({ props }) => ({});
+
+export default connect(mapStateToProps)(Ballot);

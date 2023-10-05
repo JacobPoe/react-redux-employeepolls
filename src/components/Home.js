@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 const Home = () => {
   return (
     <>
@@ -6,4 +8,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = ({ props }) => ({});
+
+export default connect(mapStateToProps)(Home);
