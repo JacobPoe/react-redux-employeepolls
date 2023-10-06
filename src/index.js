@@ -21,7 +21,6 @@ const store = createStore(reducers, middleware);
 //   middleware: (getDefaultMiddleware) =>
 //     getDefaultMiddleware().concat(middleware)
 // });
-console.log(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

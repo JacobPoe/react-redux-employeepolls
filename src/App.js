@@ -16,7 +16,6 @@ import Question from './components/Question';
 const App = (props) => {
   useEffect(() => {
     props.dispatch(handleInitialData());
-    console.log(props);
   }, []);
 
   return (

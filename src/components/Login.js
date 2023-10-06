@@ -11,8 +11,6 @@ const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  console.log(props);
-
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -88,6 +86,6 @@ const Login = (props) => {
   );
 };
 
-const mapStateToProps = ({ props }) => ({});
-
-export default connect(mapStateToProps)(Login);
+export default connect((state) => ({
+  users: state.users
+}))(Login);
