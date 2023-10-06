@@ -13,8 +13,6 @@ const withRouter = (Component) => {
 };
 
 const Question = (props) => {
-  console.log(props);
-  console.log('id: ', props.router.params.id);
   return (
     <>
       <h1>Question</h1>

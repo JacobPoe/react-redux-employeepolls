@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const PollsNavbar = (props) => {
-  console.log(props.user);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
