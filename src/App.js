@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { handleInitialData } from './actions/shared';
 
-import Login from './components/Login';
+import FourOhFour from './components/404';
 import Home from './components/Home';
-import Nav from './components/Nav';
+import Leaderboard from './components/Leaderboard';
+import Login from './components/Login';
+import PollsNavbar from './components/PollsNavbar';
 import Question from './components/Question';
 
 const App = (props) => {
@@ -22,15 +24,16 @@ const App = (props) => {
     <>
       <LoadingBar />
       <div className="App">
-        {props.authedUser !== true ? (
+        {!props.authedUser ? (
           <Login />
         ) : (
           <>
-            <Nav />
+            <PollsNavbar />
             <Routes>
               <Route exact path="/" element={<Home />} />
-
+              <Route exact path="/leaderboard" element={<Leaderboard />} />
               <Route exact path="/question/:id" element={<Question />} />
+              <Route path="*" element={<FourOhFour />} />
             </Routes>
           </>
         )}

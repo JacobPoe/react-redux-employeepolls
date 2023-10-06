@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-// import { _getUsers } from '../_DATA';
+import { setAuthedUser } from '../actions/authedUser';
 
 const Login = (props) => {
-  // TODO: Remove default credentials
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState('mtsamis');
+  const [password, setPassword] = useState('xyz123');
+
+  const clearForm = () => {
+    setUsername('');
+    setPassword('');
+  };
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -23,17 +30,17 @@ const Login = (props) => {
      */
 
     // 1
-    // const users = await _getUsers();
     const account = props.users[username] ? props.users[username] : undefined;
 
     // 2 & 3
     if (!account || account.password !== password) {
       alert('Invalid credentials. Please try again.');
-      setUsername('');
-      setPassword('');
+      clearForm();
     } else {
       alert(`Welcome, ${username}!`);
       // TODO: Implement step 4
+      props.dispatch(setAuthedUser(account));
+      navigate('/');
     }
   };
 
@@ -87,5 +94,6 @@ const Login = (props) => {
 };
 
 export default connect((state) => ({
-  users: state.users
+  users: state.users,
+  authedUser: state.authedUser
 }))(Login);
