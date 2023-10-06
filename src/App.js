@@ -3,24 +3,27 @@ import { Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
 import { LoadingBar } from 'react-redux-loading-bar';
 
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { handleInitialData } from './actions/shared';
+
 import Login from './components/Login';
 import Home from './components/Home';
 import Nav from './components/Nav';
-
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Question from './components/Question';
 
 const App = (props) => {
   useEffect(() => {
-    // TODO: write a props.dispatch() method to load initial questions data
+    props.dispatch(handleInitialData());
+    console.log(props);
   }, []);
 
   return (
     <>
       <LoadingBar />
       <div className="App">
-        {props.loading === true ? (
+        {props.authedUser !== true ? (
           <Login />
         ) : (
           <>
@@ -37,8 +40,6 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = ({ authedUser }) => ({
-  loading: authedUser === null
-});
-
-export default connect(mapStateToProps)(App);
+export default connect((state) => ({
+  authedUser: state.authedUser
+}))(App);

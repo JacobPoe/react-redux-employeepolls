@@ -9,13 +9,10 @@ const Nav = (props) => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/new">Leaderboard</Link>
-        </li>
-        <li>
-          <Link to="/new">Login</Link>
+          <Link to="/leaderboard">Leaderboard</Link>
         </li>
       </ul>
-      {/** TODO: Add section for user details */}
+      {/** TODO: Add section for user details */}({props.user})
     </nav>
   );
 };

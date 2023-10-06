@@ -4,29 +4,39 @@ import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+// import { _getUsers } from '../_DATA';
 
 const Login = (props) => {
+  // TODO: Remove default credentials
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (event) => {
-    event.preventDefault();
+  console.log(props);
 
-    const unauthedUser = {
-      username: username,
-      password: password
-    };
-    console.log(unauthedUser);
+  const handleLogin = async (event) => {
+    event.preventDefault();
 
     /**
      * TODO: Handle login logic
-     * 1) Check to see if user w/ entered username exists in store
-     * 2) If user exists, check if passwords match
-     * 3) If user doesn't exist, alert error
+     * 1) Check to see if user w/ entered username exists in store  X
+     * 2) If user exists, check if passwords match                  X
+     * 3) If user doesn't exist, alert error                        X
      * 4) If user exists, update store andredirect to homepage
      */
 
-    // TODO: Update store to set logged in user on success
+    // 1
+    // const users = await _getUsers();
+    const account = props.users[username] ? props.users[username] : undefined;
+
+    // 2 & 3
+    if (!account || account.password !== password) {
+      alert('Invalid credentials. Please try again.');
+      setUsername('');
+      setPassword('');
+    } else {
+      alert(`Welcome, ${username}!`);
+      // TODO: Implement step 4
+    }
   };
 
   return (
@@ -47,6 +57,7 @@ const Login = (props) => {
               <Form.Control
                 type="text"
                 placeholder="Enter username"
+                value={username}
                 onChange={(event) => setUsername(event.target.value)}
               />
             </Form.Group>
@@ -56,13 +67,18 @@ const Login = (props) => {
               <Form.Control
                 type="password"
                 placeholder="Password"
+                value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
             </Form.Group>
           </Modal.Body>
 
           <Modal.Footer>
-            <Button type="submit" variant="primary">
+            <Button
+              type="submit"
+              variant="primary"
+              disabled={username === '' || password === ''}
+            >
               Log In
             </Button>
           </Modal.Footer>
