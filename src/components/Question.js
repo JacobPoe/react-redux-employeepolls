@@ -20,5 +20,6 @@ const Question = (props) => {
   );
 };
 
-const mapStateToProps = ({ props }) => ({});
-export default withRouter(connect(mapStateToProps)(Question));
+export default connect((state) => ({
+  authedUser: state.authedUser
+}))(Question);

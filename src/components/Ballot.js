@@ -13,6 +13,6 @@ const Ballot = (props) => {
   );
 };
 
-const mapStateToProps = ({ props }) => ({});
-
-export default connect(mapStateToProps)(Ballot);
+export default connect((state) => ({
+  authedUser: state.authedUser
+}))(Ballot);

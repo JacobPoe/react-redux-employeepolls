@@ -40,7 +40,6 @@ const Login = (props) => {
       alert(`Welcome, ${username}!`);
       // TODO: Implement step 4
       props.dispatch(setAuthedUser(account));
-      navigate('/');
     }
   };
 

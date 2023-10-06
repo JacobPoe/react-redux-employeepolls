@@ -8,6 +8,6 @@ const Home = (props) => {
   );
 };
 
-const mapStateToProps = ({ props }) => ({});
-
-export default connect(mapStateToProps)(Home);
+export default connect((state) => ({
+  authedUser: state.authedUser
+}))(Home);
