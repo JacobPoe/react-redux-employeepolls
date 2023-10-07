@@ -1,32 +1,49 @@
-import { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router';
 import { connect } from 'react-redux';
 import { LoadingBar } from 'react-redux-loading-bar';
-
-import Login from './components/Login';
-import Home from './components/Home';
-import Nav from './components/Nav';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { handleInitialData } from './actions/shared';
+import { setAuthedUser } from './actions/authedUser';
+
+import FourOhFour from './components/404';
+import Home from './components/Home';
+import Leaderboard from './components/Leaderboard';
+import Login from './components/Login';
+import PollsNavbar from './components/PollsNavbar';
+import Question from './components/Question';
+
 const App = (props) => {
+  // Load users and questions data on initial launch
   useEffect(() => {
-    // TODO: write a props.dispatch() method to load initial questions data
+    props.dispatch(handleInitialData());
   }, []);
+
+  // Detect navigation in order to trigger reauthentication
+  const location = useLocation();
+  useEffect(() => {
+    // Set props.authedUser to null to force
+    // reauthentication via the <Login /> component
+    props.dispatch(setAuthedUser(null));
+  }, [location]);
 
   return (
     <>
       <LoadingBar />
       <div className="App">
-        {/** TODO: properly load component */}
-        {props.loading === true ? (
+        {!props.authedUser ? (
           <Login />
         ) : (
           <>
-            <Nav />
+            <PollsNavbar />
             <Routes>
               <Route exact path="/" element={<Home />} />
+              <Route exact path="/leaderboard" element={<Leaderboard />} />
+              <Route exact path="/question/:id" element={<Question />} />
+              <Route path="*" element={<FourOhFour />} />
             </Routes>
           </>
         )}
@@ -35,8 +52,6 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = ({ authedUser }) => ({
-  loading: authedUser === null
-});
-
-export default connect(mapStateToProps)(App);
+export default connect((state) => ({
+  authedUser: state.authedUser
+}))(App);
