@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Button from 'react-bootstrap/Button';
@@ -9,6 +9,16 @@ import { setAuthedUser } from '../actions/authedUser';
 const Login = (props) => {
   const [username, setUsername] = useState('mtsamis');
   const [password, setPassword] = useState('xyz123');
+
+  const [canSubmit, setCanSubmit] = useState(false);
+
+  useEffect(() => {
+    const answer =
+      username !== '' && // If username field is not empty
+      password !== '' && // If password field is not empty
+      Object.keys(props.users).length > 0; // If props.users is not empty
+    setCanSubmit(answer);
+  }, [username, password, props.users]);
 
   const clearForm = () => {
     setUsername('');
@@ -73,11 +83,7 @@ const Login = (props) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={username === '' || password === ''}
-            >
+            <Button type="submit" variant="primary" disabled={!canSubmit}>
               Log In
             </Button>
           </Modal.Footer>
