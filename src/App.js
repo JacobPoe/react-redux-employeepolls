@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router';
 import { connect } from 'react-redux';
 import { LoadingBar } from 'react-redux-loading-bar';
 
@@ -7,6 +7,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { handleInitialData } from './actions/shared';
+import { setAuthedUser } from './actions/authedUser';
 
 import FourOhFour from './components/404';
 import Home from './components/Home';
@@ -16,9 +17,18 @@ import PollsNavbar from './components/PollsNavbar';
 import Question from './components/Question';
 
 const App = (props) => {
+  // Load users and questions data on initial launch
   useEffect(() => {
     props.dispatch(handleInitialData());
   }, []);
+
+  // Detect navigation in order to trigger reauthentication
+  const location = useLocation();
+  useEffect(() => {
+    // Set props.authedUser to null to force
+    // reauthentication via the <Login /> component
+    props.dispatch(setAuthedUser(null));
+  }, [location]);
 
   return (
     <>

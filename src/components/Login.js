@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,8 +7,6 @@ import Modal from 'react-bootstrap/Modal';
 import { setAuthedUser } from '../actions/authedUser';
 
 const Login = (props) => {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState('mtsamis');
   const [password, setPassword] = useState('xyz123');
 
@@ -18,14 +15,13 @@ const Login = (props) => {
     setPassword('');
   };
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
 
     /**
-     * TODO: Handle login logic
-     * 1) Check to see if user w/ entered username exists in store  X
-     * 2) If user exists, check if passwords match                  X
-     * 3) If user doesn't exist, alert error                        X
+     * 1) Check to see if user w/ entered username exists in store
+     * 2) If user exists, check if passwords match
+     * 3) If user doesn't exist, alert error
      * 4) If user exists, update store andredirect to homepage
      */
 
@@ -37,8 +33,7 @@ const Login = (props) => {
       alert('Invalid credentials. Please try again.');
       clearForm();
     } else {
-      alert(`Welcome, ${username}!`);
-      // TODO: Implement step 4
+      // 4
       props.dispatch(setAuthedUser(account));
     }
   };
