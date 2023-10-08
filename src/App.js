@@ -42,6 +42,7 @@ const App = (props) => {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/leaderboard" element={<Leaderboard />} />
+              <Route exact path="/new" element={<Leaderboard />} />
               <Route exact path="/question/:id" element={<Question />} />
               <Route path="*" element={<FourOhFour />} />
             </Routes>

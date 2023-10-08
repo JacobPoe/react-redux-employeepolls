@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+/** 
+##########################
+* BALLOT 
+##########################
+*/
+
+.ballot-card {
+  width: 24rem;
+}
+.ballot-row {
+  display: inline-flex;
+}
+
+.ballot-or {
+  width: 12rem;
+  vertical-align: baseline;
+}
