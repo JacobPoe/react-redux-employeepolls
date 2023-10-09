@@ -54,3 +54,17 @@
   width: 12rem;
   vertical-align: baseline;
 }
+
+/** 
+##########################
+* NEW QUESTION 
+##########################
+*/
+.poll-option {
+  display: inline-flex;
+  width: 24rem;
+}
+
+button.poll-submit {
+  display: inline-flex;
+}
