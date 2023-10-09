@@ -6,8 +6,11 @@ import { addQuestion } from '../actions/questions';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router';
 
 const NewQuestion = (props) => {
+  const navigate = useNavigate();
+
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
 
@@ -34,8 +37,7 @@ const NewQuestion = (props) => {
     const question = createQuestion();
     props.dispatch(addQuestion(question));
 
-    setOptionOne('');
-    setOptionTwo('');
+    navigate('/');
   };
 
   return (

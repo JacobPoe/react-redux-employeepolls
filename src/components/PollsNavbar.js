@@ -10,7 +10,7 @@ const PollsNavbar = (props) => {
     <Navbar expand="lg" sticky="top" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Jake Poe
+          Jake Poe | Employee Polls
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -21,18 +21,9 @@ const PollsNavbar = (props) => {
             <Nav.Link as={Link} to="/new">
               New Poll
             </Nav.Link>
-            <Navbar.Collapse className="justify-content-end">
-              {/* 
-              TODO: RENDER PFP
-              */}
-              <Navbar.Text>
-                <img
-                  src={props.authedUser?.avatarUrl}
-                  alt={`${props.authedUser?.name}'s profile picture.`}
-                />
-                {props.authedUser?.name ? props.authedUser?.name : 'Profile'}
-              </Navbar.Text>
-            </Navbar.Collapse>
+            <Navbar.Text className="justify-content-end">
+              {props.authedUser?.name ? props.authedUser?.name : 'Profile'}
+            </Navbar.Text>
           </Nav>
         </Navbar.Collapse>
       </Container>
