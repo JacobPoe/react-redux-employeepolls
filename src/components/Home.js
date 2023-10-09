@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import Accordion from 'react-bootstrap/Accordion';
 import Image from 'react-bootstrap/Image';
-import { Link } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
@@ -46,90 +45,108 @@ const Home = (props) => {
       <Tabs defaultActiveKey="unanswered" id="polls-tabs" className="mb-3">
         <Tab eventKey="unanswered" title="Unanswered">
           <Accordion>
-            {unansweredQuestions.map((question) => {
-              return (
-                <Accordion.Item
-                  id={question.id}
-                  key={question.id}
-                  eventKey={question.id}
-                >
-                  <Accordion.Header>
-                    {`Question by @${question.author}`}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <h2>WOULD YOU RATHER</h2>
-                    <hr />
-                    <div className="ballot-row">
-                      <Ballot
-                        className="ballot option-one"
-                        option={{
-                          number: 1,
-                          contents: question.optionOne
-                        }}
-                        questionId={question.id}
+            {unansweredQuestions
+              .map((question) => {
+                const time = new Date(question.timestamp)
+                  .toLocaleDateString('en-us')
+                  .toString();
+                return (
+                  <Accordion.Item
+                    id={question.id}
+                    key={question.id}
+                    eventKey={question.id}
+                  >
+                    <Accordion.Header>
+                      <Image
+                        src={props.users[question.author]?.avatarURL}
+                        roundedCircle
                       />
-                      <div className="ballot-or">
-                        <h3>OR</h3>
+                      {`Question by @${question.author} | ${time}`}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <h2>WOULD YOU RATHER</h2>
+                      <hr />
+                      <div className="ballot-row">
+                        <Ballot
+                          className="ballot option-one"
+                          option={{
+                            number: 1,
+                            contents: question.optionOne
+                          }}
+                          questionId={question.id}
+                        />
+                        <div className="ballot-or">
+                          <h3>OR</h3>
+                        </div>
+                        <Ballot
+                          className="ballot option-two"
+                          option={{
+                            number: 2,
+                            contents: question.optionTwo
+                          }}
+                          questionId={question.id}
+                        />
                       </div>
-                      <Ballot
-                        className="ballot option-two"
-                        option={{
-                          number: 2,
-                          contents: question.optionTwo
-                        }}
-                        questionId={question.id}
-                      />
-                    </div>
-                  </Accordion.Body>
-                </Accordion.Item>
-              );
-            })}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                );
+              })
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp > 0;
+              })}
           </Accordion>
         </Tab>
         <Tab eventKey="answered" title="Answered">
           <Accordion>
-            {answeredQuestions.map((question) => {
-              return (
-                <Accordion.Item
-                  id={question.id}
-                  key={question.id}
-                  eventKey={question.id}
-                >
-                  <Accordion.Header>
-                    <Image
-                      src={props.users[question.author]?.avatarURL}
-                      roundedCircle
-                    />
-                    {`Question by @${question.author}`}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <h2>WOULD YOU RATHER</h2>
-                    <hr />
-                    <div className="ballot-row">
-                      <Ballot
-                        className="ballot option-one"
-                        option={{
-                          number: 1,
-                          contents: question.optionOne
-                        }}
-                        questionId={question.id}
+            {answeredQuestions
+              .map((question) => {
+                const time = new Date(question.timestamp)
+                  .toLocaleDateString('en-us')
+                  .toString();
+                return (
+                  <Accordion.Item
+                    id={question.id}
+                    key={question.id}
+                    eventKey={question.id}
+                  >
+                    <Accordion.Header>
+                      <Image
+                        src={props.users[question.author]?.avatarURL}
+                        roundedCircle
                       />
-                      <div className="ballot-or">
-                        <h3>OR</h3>
+                      {`Question by @${question.author} | ${time}`}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <h2>WOULD YOU RATHER</h2>
+                      <hr />
+                      <div className="ballot-row">
+                        <Ballot
+                          className="ballot option-one"
+                          option={{
+                            number: 1,
+                            contents: question.optionOne
+                          }}
+                          questionId={question.id}
+                        />
+                        <div className="ballot-or">
+                          <h3>OR</h3>
+                        </div>
+                        <Ballot
+                          className="ballot option-two"
+                          option={{
+                            number: 2,
+                            contents: question.optionTwo
+                          }}
+                          questionId={question.id}
+                        />
                       </div>
-                      <Ballot
-                        className="ballot option-two"
-                        option={{
-                          number: 2,
-                          contents: question.optionTwo
-                        }}
-                        questionId={question.id}
-                      />
-                    </div>
-                  </Accordion.Body>
-                </Accordion.Item>
-              );
-            })}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                );
+              })
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp > 0;
+              })}
           </Accordion>
         </Tab>
       </Tabs>

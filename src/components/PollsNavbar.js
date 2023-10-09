@@ -24,12 +24,12 @@ const PollsNavbar = (props) => {
             <Navbar.Collapse className="justify-content-end">
               {/* 
               TODO: RENDER PFP
-              <img
-                src={props.authedUser?.avatarUrl}
-                alt={`${props.authedUser?.name}'s profile picture.`}
-              />
               */}
               <Navbar.Text>
+                <img
+                  src={props.authedUser?.avatarUrl}
+                  alt={`${props.authedUser?.name}'s profile picture.`}
+                />
                 {props.authedUser?.name ? props.authedUser?.name : 'Profile'}
               </Navbar.Text>
             </Navbar.Collapse>

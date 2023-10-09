@@ -39,6 +39,12 @@
 
 /** 
 ##########################
+* GLOBAL STYLES 
+##########################
+*/
+
+/** 
+##########################
 * BALLOT 
 ##########################
 */
@@ -53,6 +59,17 @@
 .ballot-or {
   width: 12rem;
   vertical-align: baseline;
+}
+
+/** 
+##########################
+* LEADERBOARD 
+##########################
+*/
+.leaderboard-entry {
+  width: 24rem;
+  margin: 0 0 2rem 0;
+  display: inline-block;
 }
 
 /** 

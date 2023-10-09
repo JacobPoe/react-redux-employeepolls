@@ -2,7 +2,6 @@ import { ADD_QUESTION } from '../actions/questions';
 import { CAST_VOTE, RECEIVE_DATA } from '../actions/shared';
 
 export default function questions(state = [], action) {
-  console.log(state);
   switch (action.type) {
     case ADD_QUESTION:
       return {
