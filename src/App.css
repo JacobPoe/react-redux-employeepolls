@@ -45,14 +45,21 @@
 
 /** 
 ##########################
-* BALLOT 
+* BALLOT / RESULT
 ##########################
 */
 
-.ballot-card {
+.ballot-card,
+.result-card {
   width: 24rem;
+  margin: 0 2rem 0 2rem;
+}.ballot-card.user-vote,
+.result-card.user-vote {
+  border: 4px solid green;
 }
-.ballot-row {
+
+.ballot-row,
+.result-row {
   display: inline-flex;
 }
 
@@ -70,6 +77,15 @@
   width: 24rem;
   margin: 0 0 2rem 0;
   display: inline-block;
+}
+
+/** 
+##########################
+* POLL DETAILS 
+##########################
+*/
+.poll-header {
+  padding: 2rem;
 }
 
 /** 

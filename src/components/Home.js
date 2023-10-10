@@ -41,7 +41,6 @@ const Home = (props) => {
   return (
     <>
       <h1>Home</h1>
-      {/** TODO: Create a Polls component to render answered and unanswered polls */}
       <Tabs defaultActiveKey="unanswered" id="polls-tabs" className="mb-3">
         <Tab eventKey="unanswered" title="Unanswered">
           <UnansweredPolls questions={unansweredQuestions} />
