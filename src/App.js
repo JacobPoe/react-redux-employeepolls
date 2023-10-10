@@ -11,11 +11,11 @@ import { setAuthedUser } from './actions/authedUser';
 
 import FourOhFour from './components/404';
 import Home from './components/Home';
-import Leaderboard from './components/Leaderboard';
+import Leaderboard from './components/Leaderboard/Leaderboard';
 import Login from './components/Login';
-import NewQuestion from './components/NewQuestion';
+import NewQuestion from './components/Questions/NewQuestion';
 import PollsNavbar from './components/PollsNavbar';
-import Question from './components/Question';
+import Question from './components/Questions/Question';
 
 const App = (props) => {
   // Load users and questions data on initial launch

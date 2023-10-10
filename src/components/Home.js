@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import Accordion from 'react-bootstrap/Accordion';
-import Image from 'react-bootstrap/Image';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import Ballot from './Ballot';
+import AnsweredPolls from './Polls/AnsweredPolls';
+import UnansweredPolls from './Polls/UnansweredPolls';
 
 const Home = (props) => {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -42,113 +41,12 @@ const Home = (props) => {
   return (
     <>
       <h1>Home</h1>
-      {/** TODO: Create a Polls component to render answered and unanswered polls */}
       <Tabs defaultActiveKey="unanswered" id="polls-tabs" className="mb-3">
         <Tab eventKey="unanswered" title="Unanswered">
-          <Accordion>
-            {unansweredQuestions
-              .sort((a, b) => {
-                return b.timestamp - a.timestamp;
-              })
-              .map((question) => {
-                const time = new Date(question.timestamp)
-                  .toLocaleDateString('en-us')
-                  .toString();
-                return (
-                  <Accordion.Item
-                    id={question.id}
-                    key={question.id}
-                    eventKey={question.id}
-                  >
-                    <Accordion.Header>
-                      <Image
-                        src={props.users[question.author]?.avatarURL}
-                        roundedCircle
-                      />
-                      {`Question by @${question.author} | ${time}`}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <h2>WOULD YOU RATHER</h2>
-                      <hr />
-                      <div className="ballot-row">
-                        <Ballot
-                          className="ballot option-one"
-                          option={{
-                            number: 1,
-                            contents: question.optionOne
-                          }}
-                          questionId={question.id}
-                        />
-                        <div className="ballot-or">
-                          <h3>OR</h3>
-                        </div>
-                        <Ballot
-                          className="ballot option-two"
-                          option={{
-                            number: 2,
-                            contents: question.optionTwo
-                          }}
-                          questionId={question.id}
-                        />
-                      </div>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                );
-              })}
-          </Accordion>
+          <UnansweredPolls questions={unansweredQuestions} />
         </Tab>
         <Tab eventKey="answered" title="Answered">
-          <Accordion>
-            {answeredQuestions
-              .sort((a, b) => {
-                return b.timestamp - a.timestamp;
-              })
-              .map((question) => {
-                const time = new Date(question.timestamp)
-                  .toLocaleDateString('en-us')
-                  .toString();
-                return (
-                  <Accordion.Item
-                    id={question.id}
-                    key={question.id}
-                    eventKey={question.id}
-                  >
-                    <Accordion.Header>
-                      <Image
-                        src={props.users[question.author]?.avatarURL}
-                        roundedCircle
-                      />
-                      {`Question by @${question.author} | ${time}`}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                      <h2>WOULD YOU RATHER</h2>
-                      <hr />
-                      <div className="ballot-row">
-                        <Ballot
-                          className="ballot option-one"
-                          option={{
-                            number: 1,
-                            contents: question.optionOne
-                          }}
-                          questionId={question.id}
-                        />
-                        <div className="ballot-or">
-                          <h3>OR</h3>
-                        </div>
-                        <Ballot
-                          className="ballot option-two"
-                          option={{
-                            number: 2,
-                            contents: question.optionTwo
-                          }}
-                          questionId={question.id}
-                        />
-                      </div>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                );
-              })}
-          </Accordion>
+          <AnsweredPolls questions={answeredQuestions} />
         </Tab>
       </Tabs>
     </>

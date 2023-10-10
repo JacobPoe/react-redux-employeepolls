@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid } from 'uuid';
 
-import { addQuestion } from '../actions/questions';
+import { addQuestion } from '../../actions/questions';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
