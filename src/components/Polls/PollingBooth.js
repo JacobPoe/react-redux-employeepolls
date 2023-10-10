@@ -8,15 +8,22 @@ import Ballot from './Ballot';
 const PollingBooth = (props) => {
   const [hasVoted, setHasVoted] = useState(false);
 
-  const castVote = (parentId, optionKey) => {
+  const castVote = (parentId, option) => {
+    console.log('casting vote: ', parentId, option);
     setHasVoted(true);
-    // props.dispatch(handleCastVote());
+    props.dispatch(
+      handleCastVote({
+        userId: props.authedUser.id,
+        questionId: props.poll.question.id,
+        selectedOption: option
+      })
+    );
   };
 
   return (
     <>
       <Ballot
-        optionKey={1}
+        optionKey={'optionOne'}
         option={props.poll.question.optionOne}
         parentId={props.poll.question.id}
         totalVoteCount={props.poll.totalVoteCount}
@@ -27,7 +34,7 @@ const PollingBooth = (props) => {
         <h4>OR</h4>
       </div>
       <Ballot
-        optionKey={2}
+        optionKey={'optionTwo'}
         option={props.poll.question.optionTwo}
         parentId={props.poll.question.id}
         totalVoteCount={props.poll.totalVoteCount}

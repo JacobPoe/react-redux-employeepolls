@@ -14,7 +14,9 @@ const Ballot = (props) => {
         props.castVoteCallback(props.parentId, props.optionKey);
       }}
     >
-      <Card.Header>Option #{props.optionKey}</Card.Header>
+      <Card.Header>
+        Option #{props.optionKey === 'optionOne' ? 1 : 2}
+      </Card.Header>
       <Card.Body>
         <Card.Title>{props.option.text}</Card.Title>
         <hr />

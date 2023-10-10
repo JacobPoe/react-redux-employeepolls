@@ -31,18 +31,15 @@ export function handleInitialData() {
   };
 }
 
-function castVote({ userId, questionId, selectedOption, unselectedOption }) {
+function castVote(info) {
   return {
     type: CAST_VOTE,
-    userId,
-    questionId,
-    selectedOption,
-    unselectedOption
+    info
   };
 }
 
 export function handleCastVote(info) {
-  console.log(info);
+  console.log('handleCastVote: ', info);
   return (dispatch) => {
     dispatch(castVote(info));
   };
