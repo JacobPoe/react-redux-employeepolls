@@ -27,6 +27,8 @@ const AnsweredPolls = (props) => {
             >
               <Accordion.Header>{`Question by @${question.author} | ${time}`}</Accordion.Header>
               <Accordion.Body>
+                <h3>WOULD YOU RATHER</h3>
+                <br />
                 <div className="result-row">
                   <Result
                     optionKey={1}

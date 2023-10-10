@@ -11,17 +11,23 @@ const Ballot = (props) => {
   // };
 
   return (
-    <>
-      <Card className="ballot-card">
-        <Card.Body>
-          <Card.Title>Option #{}</Card.Title>
-          <Card.Text>{}</Card.Text>
-        </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroup.Item>{Object.keys(props).length} vote(s)</ListGroup.Item>
-        </ListGroup>
-      </Card>
-    </>
+    <Card
+      className={[
+        'ballot-card',
+        props.option.votes.includes(props.authedUser.id) ? 'user-vote' : ''
+      ]}
+    >
+      <Card.Header>Option #{props.optionKey}</Card.Header>
+      <Card.Body>
+        <Card.Title>{props.option.text}</Card.Title>
+        <hr />
+        <Card.Text>Total Votes: {props.option.votes.length}</Card.Text>
+        <Card.Text>
+          Percentage: {(props.option.votes.length / props.totalVoteCount) * 100}
+          %
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 

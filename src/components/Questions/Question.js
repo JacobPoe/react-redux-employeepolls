@@ -25,6 +25,8 @@ const Question = (props) => {
         </h3>
         <h5>{time}</h5>
       </div>
+      <h3>WOULD YOU RATHER</h3>
+      <br />
       {id ? (
         <div className="result-row">
           <Result
