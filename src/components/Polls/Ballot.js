@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { handleCastVote } from './../actions/shared';
+import { handleCastVote } from '../../actions/shared';
 
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';

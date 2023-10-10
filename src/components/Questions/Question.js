@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import FourOhFour from './404';
+import FourOhFour from '../404';
 
 const Question = (props) => {
   const { id } = useParams();
