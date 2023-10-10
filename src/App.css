@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+
+/** 
+##########################
+* GLOBAL STYLES 
+##########################
+*/
+
+/** 
+##########################
+* BALLOT 
+##########################
+*/
+
+.ballot-card {
+  width: 24rem;
+}
+.ballot-row {
+  display: inline-flex;
+}
+
+.ballot-or {
+  width: 12rem;
+  vertical-align: baseline;
+}
+
+/** 
+##########################
+* LEADERBOARD 
+##########################
+*/
+.leaderboard-entry {
+  width: 24rem;
+  margin: 0 0 2rem 0;
+  display: inline-block;
+}
+
+/** 
+##########################
+* NEW QUESTION 
+##########################
+*/
+.poll-option {
+  display: inline-flex;
+  width: 24rem;
+}
+
+button.poll-submit {
+  display: inline-flex;
+}

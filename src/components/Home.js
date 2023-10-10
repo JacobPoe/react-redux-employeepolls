@@ -2,20 +2,31 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import Accordion from 'react-bootstrap/Accordion';
+import Image from 'react-bootstrap/Image';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import Ballot from './Ballot';
 
 const Home = (props) => {
-  const [questions, setQuestions] = useState([]);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [unansweredQuestions, setUnansweredQuestions] = useState([]);
 
   useEffect(() => {
     const qs = Object.keys(props.questions).map((key) => {
       return props.questions[key];
     });
 
-    setQuestions(qs);
+    const answeredQs = qs.filter((question) => {
+      return checkIsAnswered(question);
+    });
+    setAnsweredQuestions(answeredQs);
+
+    const unansweredQs = qs.filter((question) => {
+      return !checkIsAnswered(question);
+    });
+    setUnansweredQuestions(unansweredQs);
+    // }, [props.questions]); // Still deciding how I want to reload state on vote
   }, []);
 
   const checkIsAnswered = (question) => {
@@ -34,20 +45,52 @@ const Home = (props) => {
       {/** TODO: Create a Polls component to render answered and unanswered polls */}
       <Tabs defaultActiveKey="unanswered" id="polls-tabs" className="mb-3">
         <Tab eventKey="unanswered" title="Unanswered">
-          Tab content for Unanswered Polls
           <Accordion>
-            {questions
-              .filter((question) => {
-                return !checkIsAnswered(question);
+            {unansweredQuestions
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp;
               })
               .map((question) => {
+                const time = new Date(question.timestamp)
+                  .toLocaleDateString('en-us')
+                  .toString();
                 return (
-                  <Accordion.Item key={question.id} eventKey={question.id}>
-                    <Accordion.Header>{`Unanswered Question by @${question.author}`}</Accordion.Header>
+                  <Accordion.Item
+                    id={question.id}
+                    key={question.id}
+                    eventKey={question.id}
+                  >
+                    <Accordion.Header>
+                      <Image
+                        src={props.users[question.author]?.avatarURL}
+                        roundedCircle
+                      />
+                      {`Question by @${question.author} | ${time}`}
+                    </Accordion.Header>
                     <Accordion.Body>
-                      <Ballot option={question.optionOne} />
+                      <h2>WOULD YOU RATHER</h2>
                       <hr />
-                      <Ballot option={question.optionTwo} />
+                      <div className="ballot-row">
+                        <Ballot
+                          className="ballot option-one"
+                          option={{
+                            number: 1,
+                            contents: question.optionOne
+                          }}
+                          questionId={question.id}
+                        />
+                        <div className="ballot-or">
+                          <h3>OR</h3>
+                        </div>
+                        <Ballot
+                          className="ballot option-two"
+                          option={{
+                            number: 2,
+                            contents: question.optionTwo
+                          }}
+                          questionId={question.id}
+                        />
+                      </div>
                     </Accordion.Body>
                   </Accordion.Item>
                 );
@@ -55,20 +98,52 @@ const Home = (props) => {
           </Accordion>
         </Tab>
         <Tab eventKey="answered" title="Answered">
-          Tab content for Answered Polls
           <Accordion>
-            {questions
-              .filter((question) => {
-                return checkIsAnswered(question);
+            {answeredQuestions
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp;
               })
               .map((question) => {
+                const time = new Date(question.timestamp)
+                  .toLocaleDateString('en-us')
+                  .toString();
                 return (
-                  <Accordion.Item key={question.id} eventKey={question.id}>
-                    <Accordion.Header>{`Unanswered Question by @${question.author}`}</Accordion.Header>
+                  <Accordion.Item
+                    id={question.id}
+                    key={question.id}
+                    eventKey={question.id}
+                  >
+                    <Accordion.Header>
+                      <Image
+                        src={props.users[question.author]?.avatarURL}
+                        roundedCircle
+                      />
+                      {`Question by @${question.author} | ${time}`}
+                    </Accordion.Header>
                     <Accordion.Body>
-                      <Ballot option={question.optionOne} />
+                      <h2>WOULD YOU RATHER</h2>
                       <hr />
-                      <Ballot option={question.optionTwo} />
+                      <div className="ballot-row">
+                        <Ballot
+                          className="ballot option-one"
+                          option={{
+                            number: 1,
+                            contents: question.optionOne
+                          }}
+                          questionId={question.id}
+                        />
+                        <div className="ballot-or">
+                          <h3>OR</h3>
+                        </div>
+                        <Ballot
+                          className="ballot option-two"
+                          option={{
+                            number: 2,
+                            contents: question.optionTwo
+                          }}
+                          questionId={question.id}
+                        />
+                      </div>
                     </Accordion.Body>
                   </Accordion.Item>
                 );
@@ -82,5 +157,6 @@ const Home = (props) => {
 
 export default connect((state) => ({
   authedUser: state.authedUser,
+  users: state.users,
   questions: state.questions
 }))(Home);

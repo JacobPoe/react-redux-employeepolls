@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { setAuthedUser } from '../actions/authedUser';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { setAuthedUser } from '../actions/authedUser';
 
 const Login = (props) => {
   const [username, setUsername] = useState('mtsamis');
