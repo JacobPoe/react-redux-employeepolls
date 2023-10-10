@@ -26,6 +26,7 @@ const Home = (props) => {
       return !checkIsAnswered(question);
     });
     setUnansweredQuestions(unansweredQs);
+    // }, [props.questions]); // Still deciding how I want to reload state on vote
   }, []);
 
   const checkIsAnswered = (question) => {
@@ -46,6 +47,9 @@ const Home = (props) => {
         <Tab eventKey="unanswered" title="Unanswered">
           <Accordion>
             {unansweredQuestions
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp;
+              })
               .map((question) => {
                 const time = new Date(question.timestamp)
                   .toLocaleDateString('en-us')
@@ -90,15 +94,15 @@ const Home = (props) => {
                     </Accordion.Body>
                   </Accordion.Item>
                 );
-              })
-              .sort((a, b) => {
-                return b.timestamp - a.timestamp > 0;
               })}
           </Accordion>
         </Tab>
         <Tab eventKey="answered" title="Answered">
           <Accordion>
             {answeredQuestions
+              .sort((a, b) => {
+                return b.timestamp - a.timestamp;
+              })
               .map((question) => {
                 const time = new Date(question.timestamp)
                   .toLocaleDateString('en-us')
@@ -143,9 +147,6 @@ const Home = (props) => {
                     </Accordion.Body>
                   </Accordion.Item>
                 );
-              })
-              .sort((a, b) => {
-                return b.timestamp - a.timestamp > 0;
               })}
           </Accordion>
         </Tab>
