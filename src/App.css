@@ -58,13 +58,23 @@
   border: 4px solid green;
 }
 
+.has-voted {
+  pointer-events: none;
+  cursor: not-allowed;  
+}
+
+div.result-hide {
+  color: transparent;
+  text-shadow: 0 0 8px #000;
+}
 .ballot-row,
 .result-row {
   display: inline-flex;
 }
 
-.ballot-or {
-  width: 12rem;
+.ballot-or,
+.result-or {
+  width: 3rem;
   vertical-align: baseline;
 }
 
@@ -81,15 +91,6 @@
 
 /** 
 ##########################
-* POLL DETAILS 
-##########################
-*/
-.poll-header {
-  padding: 2rem;
-}
-
-/** 
-##########################
 * NEW QUESTION 
 ##########################
 */
@@ -100,4 +101,22 @@
 
 button.poll-submit {
   display: inline-flex;
+}
+
+/** 
+##########################
+* POLL DETAILS 
+##########################
+*/
+.poll-header {
+  padding: 2rem;
+}
+
+/** 
+##########################
+* POLLING BOOTH
+##########################
+*/
+.polling-booth {
+
 }

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Ballot from '../Polls/Ballot';
+import PollingBooth from '../Polls/PollingBooth';
 import Result from '../Polls/Result';
 import FourOhFour from '../404';
 
@@ -15,6 +16,16 @@ const Question = (props) => {
     .toLocaleDateString('en-us')
     .toString();
 
+  const checkIsAnswered = (question) => {
+    // Combine the arrays of voters for each option
+    // into one array
+    const voters = [...question.optionOne.votes, ...question.optionTwo.votes];
+
+    // Return whether or not the voters array
+    // includes the logged-in user's ID
+    return voters.includes(props.authedUser.id);
+  };
+
   return !question ? (
     <FourOhFour />
   ) : (
@@ -27,7 +38,7 @@ const Question = (props) => {
       </div>
       <h3>WOULD YOU RATHER</h3>
       <br />
-      {id ? (
+      {checkIsAnswered(question) ? (
         <div className="result-row">
           <Result
             optionKey={1}
@@ -42,15 +53,8 @@ const Question = (props) => {
         </div>
       ) : (
         <div className="ballot-row">
-          <Ballot
-            optionKey={1}
-            option={question.optionOne}
-            totalVoteCount={totalVoteCount}
-          />
-          <Ballot
-            optionKey={2}
-            option={question.optionTwo}
-            totalVoteCount={totalVoteCount}
+          <PollingBooth
+            poll={{ question: question, totalVoteCount: totalVoteCount }}
           />
         </div>
       )}

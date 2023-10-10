@@ -35,6 +35,9 @@ const AnsweredPolls = (props) => {
                     option={question.optionOne}
                     totalVoteCount={totalVoteCount}
                   />
+                  <div className="result-or">
+                    <h4>OR</h4>
+                  </div>
                   <Result
                     optionKey={2}
                     option={question.optionTwo}

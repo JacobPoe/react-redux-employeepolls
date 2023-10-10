@@ -3,15 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { Accordion, Image } from 'react-bootstrap';
 
-import { handleCastVote } from '../../actions/shared';
-
-import Ballot from './Ballot';
+import PollingBooth from './PollingBooth';
 
 const UnansweredPolls = (props) => {
-  console.log(props);
-  const castVote = () => {
-    props.dispatch(handleCastVote());
-  };
   return (
     <Accordion>
       {props.questions
@@ -35,17 +29,8 @@ const UnansweredPolls = (props) => {
               <Accordion.Body>
                 <h3>WOULD YOU RATHER</h3>
                 <br />
-                <div className="result-row">
-                  <Ballot
-                    optionKey={1}
-                    option={question.optionOne}
-                    totalVoteCount={totalVoteCount}
-                  />
-                  <Ballot
-                    optionKey={2}
-                    option={question.optionTwo}
-                    totalVoteCount={totalVoteCount}
-                  />
+                <div className="ballot-row">
+                  <PollingBooth poll={{ question, totalVoteCount }} />
                 </div>
                 <hr />
                 <h6>
