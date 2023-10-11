@@ -1,30 +1,48 @@
 import { connect } from 'react-redux';
 
-// import { handleCastVote } from '../../actions/shared';
-
 import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
 
 const Ballot = (props) => {
-  // const castVote = () => {
-  //   props.dispatch(handleCastVote());
-  // };
+  // const { id } = useParams();
+  // useEffect(() => {
+  //   console.log('change detected');
+
+  //   if (!id) {
+
+  //   }
+
+  // }, [props.questions]);
 
   return (
-    <>
-      <Card className="ballot-card">
-        <Card.Body>
-          <Card.Title>Option #{}</Card.Title>
-          <Card.Text>{}</Card.Text>
-        </Card.Body>
-        <ListGroup className="list-group-flush">
-          <ListGroup.Item>{Object.keys(props).length} vote(s)</ListGroup.Item>
-        </ListGroup>
-      </Card>
-    </>
+    <Card
+      className={[
+        'ballot-card',
+        props.hasVoted ? 'has-voted' : '',
+        props.option.votes.includes(props.authedUser.id) ? 'user-vote' : ''
+      ]}
+      onClick={() => {
+        props.castVoteCallback(props.parentId, props.optionKey);
+      }}
+    >
+      <Card.Header>
+        Option #{props.optionKey === 'optionOne' ? 1 : 2}
+      </Card.Header>
+      <Card.Body>
+        <Card.Title>{props.option.text}</Card.Title>
+        <hr />
+        <div className={[props.hasVoted ? 'result-show' : 'result-hide']}>
+          <Card.Text>Total Votes: {props.option.votes.length}</Card.Text>
+          <Card.Text>
+            Percentage:{' '}
+            {(props.option.votes.length / props.totalVoteCount) * 100}%
+          </Card.Text>
+        </div>
+      </Card.Body>
+    </Card>
   );
 };
 
 export default connect((state) => ({
-  authedUser: state.authedUser
+  authedUser: state.authedUser,
+  questions: state.questions
 }))(Ballot);

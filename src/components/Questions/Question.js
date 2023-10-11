@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Ballot from '../Polls/Ballot';
-import Result from '../Polls/Result';
+import { checkIsAnswered } from '../../actions/questions';
+
+import PollingBooth from '../Polls/PollingBooth';
+import ResultsBoard from '../Polls/ResultsBoard';
 import FourOhFour from '../404';
 
 const Question = (props) => {
@@ -25,40 +27,23 @@ const Question = (props) => {
         </h3>
         <h5>{time}</h5>
       </div>
-      {id ? (
-        <div className="result-row">
-          <Result
-            optionKey={1}
-            option={question.optionOne}
-            totalVoteCount={totalVoteCount}
-          />
-          <Result
-            optionKey={2}
-            option={question.optionTwo}
-            totalVoteCount={totalVoteCount}
-          />
-        </div>
+      <h3>WOULD YOU RATHER</h3>
+      <br />
+      {checkIsAnswered(question, props.authedUser.id) ? (
+        <ResultsBoard question={question} totalVoteCount={totalVoteCount} />
       ) : (
-        <div className="ballot-row">
-          <Ballot
-            optionKey={1}
-            option={question.optionOne}
-            totalVoteCount={totalVoteCount}
-          />
-          <Ballot
-            optionKey={2}
-            option={question.optionTwo}
-            totalVoteCount={totalVoteCount}
-          />
-        </div>
+        <PollingBooth
+          poll={{ question: question, totalVoteCount: totalVoteCount }}
+        />
       )}
       <hr />
       <h6>
         {question.optionOne.votes.includes(props.authedUser.id) ||
         question.optionTwo.votes.includes(props.authedUser.id)
-          ? 'You have already cast your vote.'
+          ? 'Your vote has been cast!'
           : 'You can still vote! Select an option now!'}
       </h6>
+      <h6>{question.id}</h6>
     </>
   );
 };

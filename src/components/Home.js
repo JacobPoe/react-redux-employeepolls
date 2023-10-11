@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
+import { checkIsAnswered } from './../actions/questions';
+
 import AnsweredPolls from './Polls/AnsweredPolls';
 import UnansweredPolls from './Polls/UnansweredPolls';
 
@@ -17,26 +19,16 @@ const Home = (props) => {
     });
 
     const answeredQs = qs.filter((question) => {
-      return checkIsAnswered(question);
+      return checkIsAnswered(question, props.authedUser.id);
     });
     setAnsweredQuestions(answeredQs);
 
     const unansweredQs = qs.filter((question) => {
-      return !checkIsAnswered(question);
+      return !checkIsAnswered(question, props.authedUser.id);
     });
     setUnansweredQuestions(unansweredQs);
     // }, [props.questions]); // Still deciding how I want to reload state on vote
   }, []);
-
-  const checkIsAnswered = (question) => {
-    // Combine the arrays of voters for each option
-    // into one array
-    const voters = [...question.optionOne.votes, ...question.optionTwo.votes];
-
-    // Return whether or not the voters array
-    // includes the logged-in user's ID
-    return voters.includes(props.authedUser.id);
-  };
 
   return (
     <>
