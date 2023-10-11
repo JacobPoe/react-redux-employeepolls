@@ -19,6 +19,10 @@ This app manages its state using Redux and its testing suite is Jest.
 
 3. Testing the project: run `npm run test` in a terminal at the root folder of the project.
 
+## Special Thanks
+
+Special thanks to [Bungie](https://www.bungie.net) whose API they provide to the Destiny community free-of-charge provided me with links to icons I could use for profile pictures. Each icon used is one of my favorite armor pieces to use in the game.
+
 ## Original Starter README
 
 This is the starter code for the final assessment project for Udacity's React & Redux course.

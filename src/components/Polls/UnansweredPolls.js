@@ -25,11 +25,17 @@ const UnansweredPolls = (props) => {
               key={`poll__${question.id}`}
               eventKey={`poll__${question.id}`}
             >
-              <Accordion.Header>{`Question by @${question.author} | ${time}`}</Accordion.Header>
+              <Accordion.Header>
+                <Image
+                  src={`${props.users[question.author].avatarURL}`}
+                  thumbnail
+                />
+                {`@${question.author} | ${time}`}
+              </Accordion.Header>
               <Accordion.Body>
                 <h3>WOULD YOU RATHER</h3>
                 <br />
-                <div className="ballot-row">
+                <div className="poll-teaser">
                   <PollingBooth
                     poll={{
                       question: question,
@@ -39,7 +45,9 @@ const UnansweredPolls = (props) => {
                 </div>
                 <hr />
                 <h6>
-                  <Link to={`/question/${question.id}`}>Link to poll</Link>
+                  <Link to={`/question/${question.id}`}>
+                    Click here to vote!
+                  </Link>
                 </h6>
                 <h6>{question.id}</h6>
               </Accordion.Body>
@@ -51,5 +59,6 @@ const UnansweredPolls = (props) => {
 };
 
 export default connect((store) => ({
-  authedUser: store.authedUser
+  authedUser: store.authedUser,
+  users: store.users
 }))(UnansweredPolls);

@@ -3,7 +3,8 @@ let users = {
     id: 'sarahedo',
     password: 'password123',
     name: 'Sarah Edo',
-    avatarURL: null,
+    avatarURL:
+      'https://www.bungie.net/common/destiny2_content/icons/6e9c81df62a6bb83b7d381fcb4df3bac.jpg',
     answers: {
       '8xf0y6ziyjabvozdd253nd': 'optionOne',
       '6ni6ok3ym7mf1p33lnez': 'optionOne',
@@ -16,7 +17,8 @@ let users = {
     id: 'tylermcginnis',
     password: 'abc321',
     name: 'Tyler McGinnis',
-    avatarURL: null,
+    avatarURL:
+      'https://www.bungie.net/common/destiny2_content/icons/47f67c1b36821561ca0199b79674ae5c.jpg',
     answers: {
       vthrdm985a262al8qx3do: 'optionOne',
       xj352vofupe1dqz9emx13r: 'optionTwo'
@@ -27,7 +29,8 @@ let users = {
     id: 'mtsamis',
     password: 'xyz123',
     name: 'Mike Tsamis',
-    avatarURL: null,
+    avatarURL:
+      'https://www.bungie.net/common/destiny2_content/icons/23e3d07bead2936a80612419f3ee9f94.jpg',
     answers: {
       xj352vofupe1dqz9emx13r: 'optionOne',
       vthrdm985a262al8qx3do: 'optionTwo',
@@ -39,7 +42,8 @@ let users = {
     id: 'zoshikanlu',
     password: 'pass246',
     name: 'Zenobia Oshikanlu',
-    avatarURL: null,
+    avatarURL:
+      'https://www.bungie.net/common/destiny2_content/icons/7676c7f610b77cdfc8e4b1d1d6804327.jpg',
     answers: {
       xj352vofupe1dqz9emx13r: 'optionOne'
     },

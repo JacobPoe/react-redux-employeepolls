@@ -3,16 +3,6 @@ import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
 
 const Ballot = (props) => {
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   console.log('change detected');
-
-  //   if (!id) {
-
-  //   }
-
-  // }, [props.questions]);
-
   return (
     <Card
       className={[

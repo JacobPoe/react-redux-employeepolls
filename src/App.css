@@ -39,15 +39,13 @@
 
 /** 
 ##########################
-* GLOBAL STYLES 
-##########################
-*/
-
-/** 
-##########################
 * BALLOT / RESULT
 ##########################
 */
+
+.ballot-card {
+  user-select: none
+}
 
 .ballot-card,
 .result-card {
@@ -117,6 +115,6 @@ button.poll-submit {
 * POLLING BOOTH
 ##########################
 */
-.polling-booth {
-
+.poll-teaser {
+  pointer-events: none;
 }

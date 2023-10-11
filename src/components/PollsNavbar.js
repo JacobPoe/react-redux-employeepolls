@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { NavDropdown } from 'react-bootstrap';
 
 const PollsNavbar = (props) => {
   return (
@@ -21,9 +22,15 @@ const PollsNavbar = (props) => {
             <Nav.Link as={Link} to="/new">
               New Poll
             </Nav.Link>
-            <Navbar.Text className="justify-content-end">
-              {props.authedUser?.name ? props.authedUser?.name : 'Profile'}
-            </Navbar.Text>
+            <NavDropdown
+              title={
+                props.authedUser?.name ? props.authedUser?.name : 'Profile'
+              }
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+            </NavDropdown>
+            <Navbar.Text className="justify-content-end"></Navbar.Text>
           </Nav>
         </Navbar.Collapse>
       </Container>

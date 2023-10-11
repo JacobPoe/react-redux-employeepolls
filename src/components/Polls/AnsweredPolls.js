@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Accordion } from 'react-bootstrap';
+import { Accordion, Image } from 'react-bootstrap';
 
 import ResultsBoard from './ResultsBoard';
 
@@ -25,7 +25,13 @@ const AnsweredPolls = (props) => {
               key={`poll__${question.id}`}
               eventKey={`poll__${question.id}`}
             >
-              <Accordion.Header>{`Question by @${question.author} | ${time}`}</Accordion.Header>
+              <Accordion.Header>
+                <Image
+                  src={`${props.users[question.author].avatarURL}`}
+                  thumbnail
+                />
+                {`@${question.author} | ${time}`}
+              </Accordion.Header>
               <Accordion.Body>
                 <h3>WOULD YOU RATHER</h3>
                 <br />
@@ -47,5 +53,6 @@ const AnsweredPolls = (props) => {
 };
 
 export default connect((store) => ({
-  authedUser: store.authedUser
+  authedUser: store.authedUser,
+  users: store.users
 }))(AnsweredPolls);

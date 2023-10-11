@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { Image } from 'react-bootstrap';
+
 import { checkIsAnswered } from '../../actions/questions';
 
 import PollingBooth from '../Polls/PollingBooth';
@@ -10,10 +12,11 @@ import FourOhFour from '../404';
 const Question = (props) => {
   const { id } = useParams();
   const question = props.questions[id];
-  const totalVoteCount =
-    question.optionOne.votes.length + question.optionTwo.votes.length;
+  const totalVoteCount = question
+    ? question.optionOne.votes.length + question.optionTwo.votes.length
+    : undefined;
 
-  const time = new Date(question.timestamp)
+  const time = new Date(question?.timestamp)
     .toLocaleDateString('en-us')
     .toString();
 
@@ -22,6 +25,7 @@ const Question = (props) => {
   ) : (
     <>
       <div className="poll-header">
+        <Image src={`${props.users[question.author].avatarURL}`} thumbnail />
         <h3>
           {props.users[question.author].name} | @{question.author}
         </h3>
