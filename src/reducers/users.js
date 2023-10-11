@@ -18,7 +18,16 @@ export default function users(state = {}, action) {
       };
     }
     case CAST_VOTE: {
-      return state;
+      return {
+        ...state,
+        [action.info.user.id]: {
+          ...state[action.info.user.id],
+          answers: {
+            ...state[action.info.user.id].answers,
+            [action.info.qid]: action.info.answer
+          }
+        }
+      };
     }
     case RECEIVE_DATA:
       return action.users;

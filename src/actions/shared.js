@@ -27,3 +27,16 @@ export function handleInitialData() {
     });
   };
 }
+
+function castVote(info) {
+  return {
+    type: CAST_VOTE,
+    info
+  };
+}
+
+export function handleCastVote(user, answer, qid) {
+  return (dispatch) => {
+    dispatch(castVote({ user, answer, qid }));
+  };
+}

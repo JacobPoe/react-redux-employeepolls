@@ -9,7 +9,19 @@ export default function questions(state = {}, action) {
         [action.question.id]: action.question
       };
     case CAST_VOTE: {
-      return state;
+      console.log(state, action);
+      return {
+        ...state,
+        [action.info.qid]: {
+          ...state[action.info.qid],
+          [action.info.answer]: {
+            ...state[action.info.qid][action.info.answer],
+            votes: state[action.info.qid][action.info.answer].votes.concat([
+              action.info.user.id
+            ])
+          }
+        }
+      };
     }
     case RECEIVE_DATA:
       return action.questions;

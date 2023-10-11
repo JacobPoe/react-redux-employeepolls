@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
 
 const Ballot = (props) => {
+  // console.log(props.option);
   return (
     <Card
       className={[
@@ -11,7 +12,7 @@ const Ballot = (props) => {
         props.option.votes.includes(props.authedUser.id) ? 'user-vote' : ''
       ]}
       onClick={() => {
-        props.castVoteCallback();
+        props.castVoteCallback(props.optionKey);
       }}
     >
       <Card.Header>

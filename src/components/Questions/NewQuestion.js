@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { v4 as uuid } from 'uuid';
 
+import { _saveQuestion } from '../../_DATA';
 import { addQuestion } from '../../actions/questions';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router';
-import { _saveQuestion } from '../../_DATA';
 
 const NewQuestion = (props) => {
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const NewQuestion = (props) => {
     const question = createQuestion();
 
     const toDispatch = await _saveQuestion(question).catch((reject) => {
-      alert('Please ensure all form fields are populated before submitting. ');
+      alert('Please ensure all form fields are populated before submitting.');
       setIsSubmitting(false);
     });
 

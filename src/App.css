@@ -45,6 +45,8 @@
 
 .ballot-card {
   user-select: none
+}.ballot-card.has-voted {
+  user-select: all;
 }
 
 .ballot-card,
