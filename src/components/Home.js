@@ -27,7 +27,6 @@ const Home = (props) => {
       return !checkIsAnswered(question, props.authedUser.id);
     });
     setUnansweredQuestions(unansweredQs);
-    // }, [props.questions]); // Still deciding how I want to reload state on vote
   }, []);
 
   return (
