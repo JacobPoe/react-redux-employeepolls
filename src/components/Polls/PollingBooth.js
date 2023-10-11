@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { handleCastVote } from '../../actions/shared';
+import { handleCastVote } from '../../actions/users';
 
 import Ballot from './Ballot';
 
 const PollingBooth = (props) => {
   const [hasVoted, setHasVoted] = useState(false);
 
-  const castVote = (parentId, option) => {
+  const castVote = () => {
     setHasVoted(true);
     props.dispatch(
       handleCastVote({
         userId: props.authedUser.id,
         questionId: props.poll.question.id,
-        selectedOption: option
+        question: props.poll.question
       })
     );
   };

@@ -27,16 +27,3 @@ export function handleInitialData() {
     });
   };
 }
-
-function castVote(info) {
-  return {
-    type: CAST_VOTE,
-    info
-  };
-}
-
-export function handleCastVote(info) {
-  return (dispatch) => {
-    dispatch(castVote(info));
-  };
-}

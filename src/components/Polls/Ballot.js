@@ -11,7 +11,7 @@ const Ballot = (props) => {
         props.option.votes.includes(props.authedUser.id) ? 'user-vote' : ''
       ]}
       onClick={() => {
-        props.castVoteCallback(props.parentId, props.optionKey);
+        props.castVoteCallback();
       }}
     >
       <Card.Header>
