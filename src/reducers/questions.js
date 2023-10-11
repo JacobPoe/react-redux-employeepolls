@@ -10,7 +10,6 @@ export default function questions(state = {}, action) {
       };
     case CAST_VOTE: {
       const question = { ...state[action.info.questionId] };
-      console.log(question);
 
       switch (action.info.selectedOption) {
         case 'optionOne': {
