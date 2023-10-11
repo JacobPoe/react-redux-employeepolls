@@ -26,6 +26,10 @@ const UnansweredPolls = (props) => {
               eventKey={`poll__${question.id}`}
             >
               <Accordion.Header>
+                <Image
+                  src={`${props.users[question.author].avatarURL}`}
+                  thumbnail
+                />
                 {`@${question.author} | ${time}`}
               </Accordion.Header>
               <Accordion.Body>

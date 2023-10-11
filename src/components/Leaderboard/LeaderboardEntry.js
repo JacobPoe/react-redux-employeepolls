@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-
 import { Card } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 
 const LeaderboardEntry = ({ user }) => {
   return (
     <>
       <Card className="leaderboard-entry">
         <Card.Body>
+          <Image src={user.avatarURL} thumbnail />
           <Card.Title>{user.name}</Card.Title>
           <Card.Subtitle>@{user.id}</Card.Subtitle>
           <hr />
@@ -25,6 +25,4 @@ const LeaderboardEntry = ({ user }) => {
   );
 };
 
-export default connect((state) => ({
-  users: state.users
-}))(LeaderboardEntry);
+export default LeaderboardEntry;

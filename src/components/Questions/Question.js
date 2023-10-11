@@ -25,6 +25,7 @@ const Question = (props) => {
   ) : (
     <>
       <div className="poll-header">
+        <Image src={`${props.users[question.author].avatarURL}`} thumbnail />
         <h3>
           {props.users[question.author].name} | @{question.author}
         </h3>
