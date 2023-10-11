@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
 import { LoadingBar } from 'react-redux-loading-bar';
 
@@ -23,13 +23,10 @@ const App = (props) => {
     props.dispatch(handleInitialData());
   }, []);
 
-  // Detect navigation in order to trigger reauthentication
-  const location = useLocation();
   useEffect(() => {
     // Set props.authedUser to null to force
     // reauthentication via the <Login /> component
     props.dispatch(setAuthedUser(null));
-    // }, [location]);
   }, []);
 
   return (
