@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Ballot from '../Polls/Ballot';
+import { checkIsAnswered } from '../../actions/questions';
+
 import PollingBooth from '../Polls/PollingBooth';
-import Result from '../Polls/Result';
+import ResultsBoard from '../Polls/ResultsBoard';
 import FourOhFour from '../404';
 
 const Question = (props) => {
@@ -15,16 +16,6 @@ const Question = (props) => {
   const time = new Date(question.timestamp)
     .toLocaleDateString('en-us')
     .toString();
-
-  const checkIsAnswered = (question) => {
-    // Combine the arrays of voters for each option
-    // into one array
-    const voters = [...question.optionOne.votes, ...question.optionTwo.votes];
-
-    // Return whether or not the voters array
-    // includes the logged-in user's ID
-    return voters.includes(props.authedUser.id);
-  };
 
   return !question ? (
     <FourOhFour />
@@ -38,33 +29,21 @@ const Question = (props) => {
       </div>
       <h3>WOULD YOU RATHER</h3>
       <br />
-      {checkIsAnswered(question) ? (
-        <div className="result-row">
-          <Result
-            optionKey={1}
-            option={question.optionOne}
-            totalVoteCount={totalVoteCount}
-          />
-          <Result
-            optionKey={2}
-            option={question.optionTwo}
-            totalVoteCount={totalVoteCount}
-          />
-        </div>
+      {checkIsAnswered(question, props.authedUser.id) ? (
+        <ResultsBoard question={question} totalVoteCount={totalVoteCount} />
       ) : (
-        <div className="ballot-row">
-          <PollingBooth
-            poll={{ question: question, totalVoteCount: totalVoteCount }}
-          />
-        </div>
+        <PollingBooth
+          poll={{ question: question, totalVoteCount: totalVoteCount }}
+        />
       )}
       <hr />
       <h6>
         {question.optionOne.votes.includes(props.authedUser.id) ||
         question.optionTwo.votes.includes(props.authedUser.id)
-          ? 'You have already cast your vote.'
+          ? 'Your vote has been cast!'
           : 'You can still vote! Select an option now!'}
       </h6>
+      <h6>{question.id}</h6>
     </>
   );
 };

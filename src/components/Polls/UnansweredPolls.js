@@ -30,14 +30,18 @@ const UnansweredPolls = (props) => {
                 <h3>WOULD YOU RATHER</h3>
                 <br />
                 <div className="ballot-row">
-                  <PollingBooth poll={{ question, totalVoteCount }} />
+                  <PollingBooth
+                    poll={{
+                      question: question,
+                      totalVoteCount: totalVoteCount
+                    }}
+                  />
                 </div>
                 <hr />
                 <h6>
-                  <Link to={`/question/${question.id}`}>
-                    Link to poll results
-                  </Link>
+                  <Link to={`/question/${question.id}`}>Link to poll</Link>
                 </h6>
+                <h6>{question.id}</h6>
               </Accordion.Body>
             </Accordion.Item>
           );

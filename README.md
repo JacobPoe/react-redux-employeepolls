@@ -17,7 +17,7 @@ This app manages its state using Redux and its testing suite is Jest.
 
   > Note: you can use the credentials of any `user` in the store.
 
-3. Testing the project: run `npm run test` in a terminal at the root folder of the project
+3. Testing the project: run `npm run test` in a terminal at the root folder of the project.
 
 ## Original Starter README
 

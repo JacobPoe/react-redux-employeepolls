@@ -29,7 +29,8 @@ const App = (props) => {
     // Set props.authedUser to null to force
     // reauthentication via the <Login /> component
     props.dispatch(setAuthedUser(null));
-  }, [location]);
+    // }, [location]);
+  }, []);
 
   return (
     <>

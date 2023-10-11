@@ -9,7 +9,6 @@ const PollingBooth = (props) => {
   const [hasVoted, setHasVoted] = useState(false);
 
   const castVote = (parentId, option) => {
-    console.log('casting vote: ', parentId, option);
     setHasVoted(true);
     props.dispatch(
       handleCastVote({
@@ -21,7 +20,7 @@ const PollingBooth = (props) => {
   };
 
   return (
-    <>
+    <div className="ballot-row">
       <Ballot
         optionKey={'optionOne'}
         option={props.poll.question.optionOne}
@@ -41,7 +40,7 @@ const PollingBooth = (props) => {
         hasVoted={hasVoted}
         castVoteCallback={castVote}
       />
-    </>
+    </div>
   );
 };
 

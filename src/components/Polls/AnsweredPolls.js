@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Accordion } from 'react-bootstrap';
 
-import Result from './Result';
+import ResultsBoard from './ResultsBoard';
 
 const AnsweredPolls = (props) => {
   return (
@@ -29,27 +29,15 @@ const AnsweredPolls = (props) => {
               <Accordion.Body>
                 <h3>WOULD YOU RATHER</h3>
                 <br />
-                <div className="result-row">
-                  <Result
-                    optionKey={1}
-                    option={question.optionOne}
-                    totalVoteCount={totalVoteCount}
-                  />
-                  <div className="result-or">
-                    <h4>OR</h4>
-                  </div>
-                  <Result
-                    optionKey={2}
-                    option={question.optionTwo}
-                    totalVoteCount={totalVoteCount}
-                  />
-                </div>
+                <ResultsBoard
+                  question={question}
+                  totalVoteCount={totalVoteCount}
+                />
                 <hr />
                 <h6>
-                  <Link to={`/question/${question.id}`}>
-                    Link to poll results
-                  </Link>
+                  <Link to={`/question/${question.id}`}>Link to poll</Link>
                 </h6>
+                <h6>{question.id}</h6>
               </Accordion.Body>
             </Accordion.Item>
           );
