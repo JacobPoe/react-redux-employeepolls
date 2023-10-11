@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import { connect } from 'react-redux';
-import { LoadingBar } from 'react-redux-loading-bar';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,7 +30,6 @@ const App = (props) => {
 
   return (
     <>
-      <LoadingBar />
       <div className="App">
         {!props.authedUser ? (
           <Login />

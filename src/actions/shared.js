@@ -1,5 +1,4 @@
 import { _getQuestions, _getUsers } from '../_DATA';
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 export const RECEIVE_DATA = 'RECEIVE_DATA';
 export const CAST_VOTE = 'CAST_VOTE';
@@ -23,10 +22,8 @@ function getInitialData() {
 
 export function handleInitialData() {
   return (dispatch) => {
-    dispatch(showLoading());
     return getInitialData().then(({ users, questions }) => {
       dispatch(receiveData(users, questions));
-      dispatch(hideLoading());
     });
   };
 }
