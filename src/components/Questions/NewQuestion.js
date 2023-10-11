@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { v4 as uuid } from 'uuid';
 
+import { _saveQuestion } from '../../_DATA';
 import { addQuestion } from '../../actions/questions';
 
 import Button from 'react-bootstrap/Button';
@@ -14,30 +14,33 @@ const NewQuestion = (props) => {
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const createQuestion = () => {
-    const qid = uuid();
-    return {
-      id: qid,
-      author: props.authedUser.id,
-      optionOne: {
-        votes: [],
-        text: optionOne
-      },
-      optionTwo: {
-        votes: [],
-        text: optionTwo
-      },
-      timestamp: Date.now()
+    const toSubmit = {
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+      author: props.authedUser.id
     };
+
+    return toSubmit;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     const question = createQuestion();
-    props.dispatch(addQuestion(question));
 
-    navigate('/');
+    const toDispatch = await _saveQuestion(question).catch((reject) => {
+      alert('Please ensure all form fields are populated before submitting.');
+      setIsSubmitting(false);
+    });
+
+    if (toDispatch) {
+      props.dispatch(addQuestion(toDispatch));
+      navigate('/');
+    }
   };
 
   return (
@@ -69,7 +72,7 @@ const NewQuestion = (props) => {
           type="submit"
           className="poll-submit"
           variant="primary"
-          disabled={!optionOne || !optionTwo}
+          disabled={(!optionOne && !optionTwo) || isSubmitting}
         >
           Submit
         </Button>

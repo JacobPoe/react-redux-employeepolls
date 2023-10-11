@@ -9,59 +9,23 @@ export default function questions(state = {}, action) {
         [action.question.id]: action.question
       };
     case CAST_VOTE: {
-      const question = { ...state[action.info.questionId] };
-
-      switch (action.info.selectedOption) {
-        case 'optionOne': {
-          return voteOptionOne(state, question, action.info.userId);
+      console.log(state, action);
+      return {
+        ...state,
+        [action.info.qid]: {
+          ...state[action.info.qid],
+          [action.info.answer]: {
+            ...state[action.info.qid][action.info.answer],
+            votes: state[action.info.qid][action.info.answer].votes.concat([
+              action.info.user.id
+            ])
+          }
         }
-        case 'optionTwo': {
-          return voteOptionTwo(state, question, action.info.userId);
-        }
-        default: {
-          return state;
-        }
-      }
+      };
     }
     case RECEIVE_DATA:
       return action.questions;
     default:
       return state;
   }
-}
-
-function voteOptionOne(state = {}, question, userId) {
-  const castVote = {
-    ...state,
-    [question.id]: {
-      ...state[question.id],
-      optionOne: {
-        votes: [...state[question.id].optionOne.votes.concat([userId])],
-        text: state[question.id].optionOne.text
-      },
-      optionTwo: {
-        ...state[question.id].optionTwo
-      }
-    }
-  };
-
-  return castVote;
-}
-
-function voteOptionTwo(state = {}, question, userId) {
-  const castVote = {
-    ...state,
-    [question.id]: {
-      ...state[question.id],
-      optionOne: {
-        ...state[question.id].optionOne
-      },
-      optionTwo: {
-        votes: [...state[question.id].optionTwo.votes.concat([userId])],
-        text: state[question.id].optionTwo.text
-      }
-    }
-  };
-
-  return castVote;
 }

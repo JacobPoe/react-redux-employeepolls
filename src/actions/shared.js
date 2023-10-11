@@ -35,8 +35,8 @@ function castVote(info) {
   };
 }
 
-export function handleCastVote(info) {
+export function handleCastVote(user, answer, qid) {
   return (dispatch) => {
-    dispatch(castVote(info));
+    dispatch(castVote({ user, answer, qid }));
   };
 }

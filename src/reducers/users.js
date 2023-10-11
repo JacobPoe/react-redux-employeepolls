@@ -1,5 +1,6 @@
-import { CAST_VOTE, RECEIVE_DATA } from '../actions/shared';
+import { RECEIVE_DATA } from '../actions/shared';
 import { ADD_QUESTION } from '../actions/questions';
+import { CAST_VOTE } from '../actions/shared';
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -19,11 +20,11 @@ export default function users(state = {}, action) {
     case CAST_VOTE: {
       return {
         ...state,
-        [action.info.userId]: {
-          ...state[action.info.userId],
+        [action.info.user.id]: {
+          ...state[action.info.user.id],
           answers: {
-            ...state[action.info.userId].answers,
-            [action.info.questionId]: action.info.selectedOption
+            ...state[action.info.user.id].answers,
+            [action.info.qid]: action.info.answer
           }
         }
       };
