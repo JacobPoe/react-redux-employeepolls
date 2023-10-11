@@ -36,7 +36,6 @@ function castVote(info) {
 }
 
 export function handleCastVote(info) {
-  console.log('handleCastVote: ', info);
   return (dispatch) => {
     dispatch(castVote(info));
   };
