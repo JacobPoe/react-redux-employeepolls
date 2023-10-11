@@ -1,11 +1,23 @@
 # Employee Polls Project
 
-1. Logging in: for ease of use, you can use the following credentials to log in:
+This project is my submission for Udacity's React Nanodegree program final project. It is a simple polling app that allows the user to log in with credentials of any user stored in `src/_DATA.js`. The user can view polls on the homepage, separated by answered and unanswered polls. You can view a leaderboard that shows which users have answered the most questions. You can also submit your own poll.
 
-- Username: mtsamis
-- Password: xyz123
+This app manages its state using Redux and its testing suite is Jest.
 
-  Note: you can use the credentials of any `user` in the store.
+## Instructions for use:
+
+1. Installing dependencies: to run the project, you must first have `npm` installed on your machine and run `npm install` in a terminal at the root folder of your project. This will install all project dependencies in a `node_modules` folder at the root of your project.
+
+2. Running the project: run `npm run start` in a terminal at the root folder of the project
+
+- Logging in: for ease of use, the following credentials are set by default:
+
+  - Username: mtsamis
+  - Password: xyz123
+
+  > Note: you can use the credentials of any `user` in the store.
+
+3. Testing the project: run `npm run test` in a terminal at the root folder of the project
 
 ## Original Starter README
 
