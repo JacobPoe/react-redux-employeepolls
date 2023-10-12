@@ -2,7 +2,6 @@ import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import FourOhFour from './404';
-import { FUNCTION_TYPES } from '@babel/types';
 
 describe('FourOhFour', () => {
   it('renders the text "404"', () => {

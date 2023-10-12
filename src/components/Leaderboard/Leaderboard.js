@@ -28,6 +28,7 @@ const Leaderboard = (props) => {
 
     handleSetUsers();
   }, [props.authedUser]);
+
   return !props.authedUser ? (
     <Login />
   ) : (
@@ -42,7 +43,11 @@ const Leaderboard = (props) => {
           <Col md={6} className="text-center">
             {users.map((user) => {
               return (
-                <LeaderboardEntry key={`leaderboard__${user.id}`} user={user} />
+                <LeaderboardEntry
+                  key={`leaderboard__${user.id}`}
+                  user={user}
+                  isActiveUser={user.id === props.authedUser.id}
+                />
               );
             })}
           </Col>
