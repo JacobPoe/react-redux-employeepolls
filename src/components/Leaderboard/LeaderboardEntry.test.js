@@ -20,8 +20,27 @@ describe('LeaderboardEntry', () => {
     ]
   }
 
-  it('should properly render the leaderboard card for user "mtsamis"', () => {
+  it('should renders the leaderboard card for user "mtsamis"', () => {
     const component = render(<LeaderboardEntry user={user} />)
     expect(component).toMatchSnapshot();
+  })
+
+  it('should properly populate all fields using the user object', () => {
+    const component = render(<LeaderboardEntry user={user} />)
+    
+    const name = component.getByTestId('entry-name');
+    expect(name).toBeInTheDocument();
+    
+    const id = component.getByTestId('entry-id');
+    expect(id).toBeInTheDocument();
+    
+    const questions = component.getByTestId('entry-questions');
+    expect(questions).toBeInTheDocument();
+    
+    const answers = component.getByTestId('entry-answers');
+    expect(answers).toBeInTheDocument();
+    
+    const total = component.getByTestId('entry-total');
+    expect(total).toBeInTheDocument();
   })
 })

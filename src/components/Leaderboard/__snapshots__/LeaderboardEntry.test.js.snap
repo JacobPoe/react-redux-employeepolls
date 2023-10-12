@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LeaderboardEntry should properly render the leaderboard card for user "mtsamis" 1`] = `
+exports[`LeaderboardEntry should renders the leaderboard card for user "mtsamis" 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -18,34 +18,54 @@ Object {
           <div
             class="card-title h5"
           >
-            Mike Tsamis
+            <span
+              data-testid="entry-name"
+            >
+              Mike Tsamis
+            </span>
           </div>
           <div
             class="card-subtitle h6"
           >
-            @
-            mtsamis
+            <span
+              data-testid="entry-id"
+            >
+              @
+              mtsamis
+            </span>
           </div>
           <hr />
           <p
             class="card-text"
           >
-            # of Questions Asked: 
-            2
+            <span
+              data-testid="entry-questions"
+            >
+              # of Questions Asked: 
+              2
+            </span>
           </p>
           <p
             class="card-text"
           >
-            # of Questions Answered: 
-            3
+            <span
+              data-testid="entry-answers"
+            >
+              # of Questions Answered: 
+              3
+            </span>
           </p>
           <hr />
           <p
             class="card-text"
           >
-            Total Votes Cast:
-             
-            5
+            <span
+              data-testid="entry-total"
+            >
+              Total Votes Cast:
+               
+              5
+            </span>
           </p>
         </div>
       </div>
@@ -65,34 +85,54 @@ Object {
         <div
           class="card-title h5"
         >
-          Mike Tsamis
+          <span
+            data-testid="entry-name"
+          >
+            Mike Tsamis
+          </span>
         </div>
         <div
           class="card-subtitle h6"
         >
-          @
-          mtsamis
+          <span
+            data-testid="entry-id"
+          >
+            @
+            mtsamis
+          </span>
         </div>
         <hr />
         <p
           class="card-text"
         >
-          # of Questions Asked: 
-          2
+          <span
+            data-testid="entry-questions"
+          >
+            # of Questions Asked: 
+            2
+          </span>
         </p>
         <p
           class="card-text"
         >
-          # of Questions Answered: 
-          3
+          <span
+            data-testid="entry-answers"
+          >
+            # of Questions Answered: 
+            3
+          </span>
         </p>
         <hr />
         <p
           class="card-text"
         >
-          Total Votes Cast:
-           
-          5
+          <span
+            data-testid="entry-total"
+          >
+            Total Votes Cast:
+             
+            5
+          </span>
         </p>
       </div>
     </div>

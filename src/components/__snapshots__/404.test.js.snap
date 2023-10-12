@@ -8,18 +8,32 @@ Object {
       <h1>
         404
       </h1>
-      <h2>
+      <h1
+        data-testid="sad"
+      >
         :(
-      </h2>
+      </h1>
+      <button
+        data-testid="flipper"
+      >
+        Click Me!
+      </button>
     </div>
   </body>,
   "container": <div>
     <h1>
       404
     </h1>
-    <h2>
+    <h1
+      data-testid="sad"
+    >
       :(
-    </h2>
+    </h1>
+    <button
+      data-testid="flipper"
+    >
+      Click Me!
+    </button>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
