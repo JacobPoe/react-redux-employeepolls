@@ -62,7 +62,7 @@ Object {
             <span
               data-testid="entry-total"
             >
-              Total Votes Cast:
+              Total Interactions:
                
               5
             </span>
@@ -129,7 +129,7 @@ Object {
           <span
             data-testid="entry-total"
           >
-            Total Votes Cast:
+            Total Interactions:
              
             5
           </span>
