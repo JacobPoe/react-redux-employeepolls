@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router';
 
+import Login from '../Login';
+
 const NewQuestion = (props) => {
   const navigate = useNavigate();
 
@@ -15,12 +17,13 @@ const NewQuestion = (props) => {
   const [optionTwo, setOptionTwo] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
   const createQuestion = () => {
     const toSubmit = {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
-      author: props.authedUser.id
+      author: props?.authedUser?.id
     };
 
     return toSubmit;
@@ -33,24 +36,34 @@ const NewQuestion = (props) => {
     const question = createQuestion();
 
     const toDispatch = await _saveQuestion(question).catch((reject) => {
-      alert('Please ensure all form fields are populated before submitting.');
+      setError(true);
       setIsSubmitting(false);
     });
 
     if (toDispatch) {
       props.dispatch(addQuestion(toDispatch));
+      setError(false);
+
       navigate('/');
     }
   };
 
-  return (
+  return !props.authedUser ? (
+    <Login />
+  ) : (
     <>
+      {error && (
+        <h1 data-testid="error-message" style={{ color: 'red' }}>
+          Error: Please ensure all fields are filled out.
+        </h1>
+      )}
       <h1>WOULD YOU RATHER</h1>
-      <Form onSubmit={(event) => handleSubmit(event)}>
+      <Form data-testid="test-form" onSubmit={(event) => handleSubmit(event)}>
         <p>Please enter two options for your peers to choose from</p>
         <Form.Group className="mb-3 poll-option" controlId="formOptionOne">
           <Form.Label>Option #1</Form.Label>
           <Form.Control
+            data-testid="form-option-one"
             type="text"
             placeholder="Fight 100 duck-sized horses?"
             value={optionOne}
@@ -61,6 +74,7 @@ const NewQuestion = (props) => {
         <Form.Group className="mb-3 poll-option" controlId="formOptionTwo">
           <Form.Label>Option #2</Form.Label>
           <Form.Control
+            data-testid="form-option-two"
             type="text"
             placeholder="Fight 1 horsed-sized duck?"
             value={optionTwo}
@@ -69,6 +83,7 @@ const NewQuestion = (props) => {
         </Form.Group>
         <br />
         <Button
+          data-testid="form-submit"
           type="submit"
           className="poll-submit"
           variant="primary"

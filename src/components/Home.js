@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
 import { checkIsAnswered } from './../actions/questions';
 
+import Login from './Login';
 import AnsweredPolls from './Polls/AnsweredPolls';
 import UnansweredPolls from './Polls/UnansweredPolls';
 
@@ -14,22 +14,26 @@ const Home = (props) => {
   const [unansweredQuestions, setUnansweredQuestions] = useState([]);
 
   useEffect(() => {
-    const qs = Object.keys(props.questions).map((key) => {
-      return props.questions[key];
-    });
+    if (props?.questions) {
+      const qs = Object.keys(props?.questions).map((key) => {
+        return props?.questions[key];
+      });
 
-    const answeredQs = qs.filter((question) => {
-      return checkIsAnswered(question, props.authedUser.id);
-    });
-    setAnsweredQuestions(answeredQs);
+      const answeredQs = qs.filter((question) => {
+        return checkIsAnswered(question, props?.authedUser?.id);
+      });
+      setAnsweredQuestions(answeredQs);
 
-    const unansweredQs = qs.filter((question) => {
-      return !checkIsAnswered(question, props.authedUser.id);
-    });
-    setUnansweredQuestions(unansweredQs);
-  }, []);
+      const unansweredQs = qs.filter((question) => {
+        return !checkIsAnswered(question, props?.authedUser?.id);
+      });
+      setUnansweredQuestions(unansweredQs);
+    }
+  }, [props.authedUser]);
 
-  return (
+  return !props.authedUser ? (
+    <Login />
+  ) : (
     <>
       <h1>Home</h1>
       <Tabs defaultActiveKey="unanswered" id="polls-tabs" className="mb-3">

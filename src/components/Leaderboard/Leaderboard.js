@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
+import Login from '../Login';
 import LeaderboardEntry from './LeaderboardEntry';
 
 const Leaderboard = (props) => {
@@ -26,8 +27,10 @@ const Leaderboard = (props) => {
     };
 
     handleSetUsers();
-  }, []);
-  return (
+  }, [props.authedUser]);
+  return !props.authedUser ? (
+    <Login />
+  ) : (
     <>
       <Container>
         <Row>
