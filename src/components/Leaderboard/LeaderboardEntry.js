@@ -53,7 +53,7 @@ const UserCard = ({ user }) => {
         <Card.Text>
           {user.questions ? (
             <span data-testid="entry-total">
-              Total Votes Cast:{' '}
+              Total Interactions:{' '}
               {user.questions.length + Object.keys(user.answers).length}
             </span>
           ) : (
