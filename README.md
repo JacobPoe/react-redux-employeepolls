@@ -10,12 +10,12 @@ This app manages its state using Redux and its testing suite is Jest.
 
 2. Running the project: run `npm run start` in a terminal at the root folder of the project
 
-- Logging in: for ease of use, the following credentials are set by default:
+- Logging in: You can use the credentials of any `user` in the store. For example:
 
   - Username: mtsamis
   - Password: xyz123
 
-  > Note: you can use the credentials of any `user` in the store.
+> Note: you cannot hit the 'login' button until user data is loaded from the store
 
 3. Testing the project: run `npm run test` in a terminal at the root folder of the project.
 
