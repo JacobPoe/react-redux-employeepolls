@@ -1,5 +1,7 @@
 # Employee Polls Project
 
+FOR MY UDACITY REVIEWER: I am submitting this right around 10PM ET on October the 11th. I am still submitting on the due date, but the course shows my submission as "past due" already, even though there is still time left in the day. Please take this into consideration when reviewing my work. Thank you!
+
 This project is my submission for Udacity's React Nanodegree program final project. It is a simple polling app that allows the user to log in with credentials of any user stored in `src/_DATA.js`. The user can view polls on the homepage, separated by answered and unanswered polls. You can view a leaderboard that shows which users have answered the most questions. You can also submit your own poll.
 
 This app manages its state using Redux and its testing suite is Jest.
