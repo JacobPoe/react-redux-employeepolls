@@ -8,6 +8,7 @@ import { checkIsAnswered } from '../../actions/questions';
 import PollingBooth from '../Polls/PollingBooth';
 import ResultsBoard from '../Polls/ResultsBoard';
 import FourOhFour from '../404';
+import Login from '../Login';
 
 const Question = (props) => {
   const { id } = useParams();
@@ -20,7 +21,9 @@ const Question = (props) => {
     .toLocaleDateString('en-us')
     .toString();
 
-  return !question ? (
+  return !props.authedUser ? (
+    <Login />
+  ) : !question ? (
     <FourOhFour />
   ) : (
     <>

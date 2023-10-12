@@ -83,8 +83,11 @@ div.result-hide {
 * LEADERBOARD 
 ##########################
 */
+.user-tile .leaderboard-entry{
+  border: 4px solid green;
+  border-radius: 4px;
+}
 .leaderboard-entry {
-  width: 24rem;
   margin: 0 0 2rem 0;
   display: inline-block;
 }

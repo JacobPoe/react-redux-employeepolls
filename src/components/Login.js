@@ -2,21 +2,34 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { setAuthedUser } from '../actions/authedUser';
+import { handleInitialData } from './../actions/shared';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 const Login = (props) => {
-  const [username, setUsername] = useState('mtsamis');
-  const [password, setPassword] = useState('xyz123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const [canSubmit, setCanSubmit] = useState(false);
+  const [error, setError] = useState(false);
+
+  // Load users and questions data on initial launch
+  useEffect(() => {
+    props.dispatch(handleInitialData());
+  }, []);
+
+  useEffect(() => {
+    // Set props.authedUser to null to force
+    // reauthentication via the <Login /> component
+    props.dispatch(setAuthedUser(null));
+  }, []);
 
   useEffect(() => {
     const answer =
-      username !== '' && // If username field is not empty
-      password !== '' && // If password field is not empty
+      (username !== '' || // If username field is not empty
+        password !== '') && // If password field is not empty
       Object.keys(props.users).length > 0; // If props.users is not empty
     setCanSubmit(answer);
   }, [username, password, props.users]);
@@ -41,10 +54,11 @@ const Login = (props) => {
 
     // 2 & 3
     if (!account || account.password !== password) {
-      alert('Invalid credentials. Please try again.');
+      setError(true);
       clearForm();
     } else {
       // 4
+      setError(false);
       props.dispatch(setAuthedUser(account));
     }
   };
@@ -61,10 +75,16 @@ const Login = (props) => {
 
         <Form onSubmit={handleLogin}>
           <Modal.Body>
+            {error && (
+              <h3 data-testid="error-message" style={{ color: 'red' }}>
+                Error: Please ensure all fields are filled out.
+              </h3>
+            )}
             <p>Please log in to vote</p>
             <Form.Group className="mb-3" controlId="formBasicUsername">
               <Form.Label>Username</Form.Label>
               <Form.Control
+                data-testid="login-username"
                 type="text"
                 placeholder="Enter username"
                 value={username}
@@ -75,6 +95,7 @@ const Login = (props) => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
+                data-testid="login-password"
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -84,7 +105,13 @@ const Login = (props) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button type="submit" variant="primary" disabled={!canSubmit}>
+            <Button
+              data-testid="login-submit"
+              type="submit"
+              variant="primary"
+              disabled={!canSubmit}
+              className={[!canSubmit ? 'disabled' : '']}
+            >
               Log In
             </Button>
           </Modal.Footer>

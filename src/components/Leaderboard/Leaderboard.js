@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
+import Login from '../Login';
 import LeaderboardEntry from './LeaderboardEntry';
 
 const Leaderboard = (props) => {
@@ -26,8 +27,11 @@ const Leaderboard = (props) => {
     };
 
     handleSetUsers();
-  }, []);
-  return (
+  }, [props.authedUser]);
+
+  return !props.authedUser ? (
+    <Login />
+  ) : (
     <>
       <Container>
         <Row>
@@ -39,7 +43,11 @@ const Leaderboard = (props) => {
           <Col md={6} className="text-center">
             {users.map((user) => {
               return (
-                <LeaderboardEntry key={`leaderboard__${user.id}`} user={user} />
+                <LeaderboardEntry
+                  key={`leaderboard__${user.id}`}
+                  user={user}
+                  isActiveUser={user.id === props.authedUser.id}
+                />
               );
             })}
           </Col>
